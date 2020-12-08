@@ -43,9 +43,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         if (viewType == MY_ITEM_TYPE) {
 
             onCreateViewHolderCount++;
-            Log.e("qige_test", "onCreateViewHolder()" + onCreateViewHolderCount);
+            LogUtils.e("qige_test", "onCreateViewHolder()" + onCreateViewHolderCount);
             View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_list, null);
-            int itemHeight = (int) (DisplayUtil.getScreenHeightByPix(mContext)/7f);
+            int itemHeight = (int) (DisplayUtil.getScreenHeightByPix(mContext) / 7f);
             itemView.setMinimumHeight(itemHeight);
             return new MyViewHolder(itemView, mContext, mClickListener);
         } else {
@@ -57,7 +57,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         onBindViewHolderCount++;
 
-        Log.e("qige_test", "onBindViewHolder()" + onBindViewHolderCount);
+        LogUtils.e("qige_test", "onBindViewHolder()" + onBindViewHolderCount);
         if (holder instanceof MyViewHolder) {
             MyViewHolder myViewHolder = (MyViewHolder) holder;
             myViewHolder.bindData(mDatas.get(position));

@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewAda
 
     /**
      * 利用java反射机制拿到RecyclerView内的缓存并打印出来
-     * */
+     */
     private void showMessage(RecyclerViewWrapper rv) {
         try {
             Field mRecycler =
@@ -138,8 +138,11 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewAda
 
             Class<?> recyclerPoolClass = Class.forName(mRecyclerPool.getType().getName());
 
-            Log.e(TAG, "mAttachedScrap（一缓） size is:" + mAttached.maxSize + ", \n" + "mCachedViews（二缓） max size is:" + mViewCacheSize + ","
-                    + getMCachedViewsInfo(mCached) + getRVPoolInfo(recyclerPoolClass, recycledViewPool));
+            LogUtils.e(TAG, "\n"
+                    + "mAttachedScrap（一缓） size is:\t" + mAttached.maxSize
+                    + ", \n" + "mCachedViews（二缓） max size is:\t" + mViewCacheSize + ", "
+                    + getMCachedViewsInfo(mCached)
+                    + getRVPoolInfo(recyclerPoolClass, recycledViewPool));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -158,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewAda
             Field mMaxScrapField = scrapDataClass.getDeclaredField("mMaxScrap");
             mScrapHeapField.setAccessible(true);
             mMaxScrapField.setAccessible(true);
-            String s = "\n mRecyclerPool（四缓） info:  ";
+            String s = "\nmRecyclerPool（四缓） info:  ";
             for (int i = 0; i < mScrap.size(); i++) {
                 ArrayList<RecyclerView.ViewHolder> item =
                         (ArrayList<RecyclerView.ViewHolder>) mScrapHeapField.get(mScrap.get(i));
@@ -179,7 +182,8 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewAda
     }
 
     private String getMCachedViewsInfo(ArrayList<RecyclerView.ViewHolder> viewHolders) {
-        String s = "mCachedViews（二缓） info:  ";
+//        String s = "mCachedViews（二缓） info:  ";
+        String s = "";
         if (viewHolders.size() > 0) {
             int i = 0;
             for (; i < viewHolders.size(); i++) {
@@ -194,11 +198,8 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewAda
             } else if (i == 2) {
                 s += "  ";
             }
-        } else {
-            s += "      ";
         }
-        return s
-                + " \n";
+        return s;
     }
 
 
